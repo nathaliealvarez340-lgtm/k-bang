@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{eventName}} - Confirmación</title>
+  </head>
+  <body style="margin:0;background:#13214e;color:#dad6cb;font-family:Arial,sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+          <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="max-width:620px;background:#0f1b42;border:1px solid #e9ab5e;border-radius:18px;">
+            <tr>
+              <td style="padding:32px;">
+                <p style="margin:0 0 8px;color:#e9ab5e;letter-spacing:0.12em;text-transform:uppercase;">K-BANG presenta</p>
+                <h1 style="margin:0 0 12px;color:#ffffff;font-size:34px;">{{eventName}}</h1>
+                <p style="margin:0 0 24px;font-size:18px;">Hola {{fullName}}, recibimos tu registro.</p>
+                <p style="margin:0 0 20px;line-height:1.6;">Revisaremos tu comprobante y te enviaremos la confirmación de tu boleto por correo.</p>
+                <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:#13214e;border-radius:14px;margin:24px 0;">
+                  <tr><td style="padding:16px;color:#dad6cb;">Correo: <strong style="color:#ffffff;">{{email}}</strong></td></tr>
+                  <tr><td style="padding:16px;color:#dad6cb;">Boleto: <strong style="color:#ffffff;">{{ticketType}}</strong></td></tr>
+                  <tr><td style="padding:16px;color:#dad6cb;">Cantidad: <strong style="color:#ffffff;">{{quantity}}</strong></td></tr>
+                  <tr><td style="padding:16px;color:#dad6cb;">Total: <strong style="color:#ffffff;">{{total}}</strong></td></tr>
+                  <tr><td style="padding:16px;color:#dad6cb;">Referencia: <strong style="color:#ffffff;">{{reference}}</strong></td></tr>
+                </table>
+                <p style="margin:0;color:#dad6cb;">{{eventDate}} · {{eventLocation}}</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
