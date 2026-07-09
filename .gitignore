@@ -21,3 +21,5 @@ pnpm-debug.log*
 
 docs/PROPUESTA PARA K- BANG.pdf
 "@ | Out-File -Encoding utf8 .gitignore
+
+.local-assets/

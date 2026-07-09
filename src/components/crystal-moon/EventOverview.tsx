@@ -21,7 +21,7 @@ const overviewCards = [
 
 export function EventOverview() {
   return (
-    <section className="overview section-band spatial-panel reveal">
+    <section className="overview section-band spatial-panel reveal" id="que-es">
       <div className="section-heading">
         <p className="eyebrow">Qué es Crystal Moon</p>
         <h2>Un concurso de baile con atmósfera de escenario lunar</h2>

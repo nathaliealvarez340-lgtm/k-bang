@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { eventConfig } from "@/lib/event-config";
+import { BackgroundVideo } from "./BackgroundVideo";
 import { CheckoutModal } from "./CheckoutModal";
 import { Countdown } from "./Countdown";
 import { EventOverview } from "./EventOverview";
@@ -9,6 +10,7 @@ import { EventTimeline } from "./EventTimeline";
 import { FAQ } from "./FAQ";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { ScrollProgress } from "./ScrollProgress";
 import { TicketsSection } from "./TicketsSection";
 
 export function CrystalMoonLanding() {
@@ -38,9 +40,11 @@ export function CrystalMoonLanding() {
 
   return (
     <>
+      <ScrollProgress />
       <Header onReserve={openCheckout} />
       <main className="cosmic-page">
         <div className="cosmic-background" aria-hidden="true">
+          <BackgroundVideo />
           <span className="star-field star-field--near" />
           <span className="star-field star-field--far" />
           <span className="nebula nebula--blue" />
@@ -51,28 +55,16 @@ export function CrystalMoonLanding() {
 
         <section className="hero spatial-panel" id="evento">
           <div className="hero__content hero-intro">
-            <p className="eyebrow">K-BANG presenta</p>
+            <p className="hero__kicker">Tec de Monterrey · Campus CCM · Agosto 2026</p>
             <h1>
-              Crystal
-              <span>Moon</span>
+              <span className="font-citadel italic">Crystal</span>
+              <span> Moon</span>
             </h1>
-            <p className="hero__tagline">{eventConfig.tagline}</p>
-            <p className="hero__copy">
-              Un concurso de baile creado para transformar el escenario en una
-              noche lunar: talento, energía, creatividad y presencia escénica
-              bajo un brillo que se siente couture, espacial y vivo.
-            </p>
-            <div className="hero__meta" aria-label="Información del evento">
-              <span>{eventConfig.eventDateLabel}</span>
-              <span>{eventConfig.eventLocation}</span>
-            </div>
+            <p className="hero__tagline">Donde el escenario es tuyo</p>
             <div className="hero__actions">
               <button className="button button--primary" onClick={openCheckout}>
                 Reservar mi boleto
               </button>
-              <a className="button button--secondary" href="#dinamica">
-                Ver dinámica
-              </a>
             </div>
           </div>
 
