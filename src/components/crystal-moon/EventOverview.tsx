@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 const overviewCards = [
   {
     title: "Competencia",
@@ -19,7 +21,7 @@ const overviewCards = [
 
 export function EventOverview() {
   return (
-    <section className="overview section-band">
+    <section className="overview section-band spatial-panel reveal">
       <div className="section-heading">
         <p className="eyebrow">Qué es Crystal Moon</p>
         <h2>Un concurso de baile con atmósfera de escenario lunar</h2>
@@ -30,8 +32,12 @@ export function EventOverview() {
         </p>
       </div>
       <div className="overview__grid">
-        {overviewCards.map((card) => (
-          <article className="feature-card" key={card.title}>
+        {overviewCards.map((card, index) => (
+          <article
+            className="feature-card"
+            key={card.title}
+            style={{ "--card-index": index } as CSSProperties}
+          >
             <span className="feature-card__glint" aria-hidden="true" />
             <h3>{card.title}</h3>
             <p>{card.text}</p>

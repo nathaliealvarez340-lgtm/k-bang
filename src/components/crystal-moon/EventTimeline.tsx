@@ -19,7 +19,7 @@ const timeline = [
 
 export function EventTimeline() {
   return (
-    <section className="timeline section-band" id="dinamica">
+    <section className="timeline section-band spatial-panel reveal" id="dinamica">
       <div className="section-heading">
         <p className="eyebrow">Dinámica del evento</p>
         <h2>De la primera luz a la premiación</h2>

@@ -23,7 +23,7 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section className="faq section-band" id="faq">
+    <section className="faq section-band spatial-panel reveal" id="faq">
       <div className="section-heading">
         <p className="eyebrow">FAQ</p>
         <h2>Preguntas frecuentes</h2>
