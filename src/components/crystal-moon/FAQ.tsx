@@ -1,37 +1,41 @@
 const faqs = [
   {
     question: "¿Dónde será el evento?",
-    answer: "El lugar está por confirmarse entre Carpa Estudiantil o Auditorio Glaxo.",
+    answer: "Crystal Moon se realizará en el Tec de Monterrey, Campus Ciudad de México (CCM).",
   },
   {
     question: "¿Cuándo es Crystal Moon?",
-    answer: "Crystal Moon está programado para el sábado 22 de agosto de 2026.",
+    answer: "El evento está programado para el sábado 22 de agosto de 2026. El horario se anunciará próximamente.",
   },
   {
     question: "¿Puedo asistir aunque no participe?",
-    answer: "Sí. El registro permite indicar si asistes como público, participante o staff/invitado.",
+    answer: "Sí. Crystal Moon está abierto a Comunidad Tec, Exatecs y público externo, ya sea como participante o asistente.",
   },
   {
-    question: "¿Cómo confirmo mi boleto?",
-    answer: "Completa tu registro, revisa la referencia generada y sube tu comprobante cuando los datos de pago estén confirmados.",
+    question: "¿Cómo reservo mi boleto?",
+    answer: "Completa el registro de interés con tus datos. El equipo de K-BANG compartirá precio, forma de pago y los siguientes pasos cuando estén confirmados.",
   },
   {
-    question: "¿Qué pasa después de subir mi comprobante?",
-    answer: "El equipo revisará tu comprobante y enviará la confirmación de tu boleto por correo.",
+    question: "¿Cuándo recibiré mi confirmación?",
+    answer: "Después de completar el proceso de reserva y validación de pago, recibirás la confirmación de tu boleto por correo.",
   },
 ];
 
 export function FAQ() {
   return (
-    <section className="faq section-band spatial-panel reveal" id="faq">
-      <div className="section-heading">
+    <section className="faq section-band reveal" id="faq">
+      <div className="faq__intro">
         <p className="eyebrow">FAQ</p>
-        <h2>Preguntas frecuentes</h2>
+        <h2>Lo que necesitas saber antes de la noche</h2>
+        <p>Información breve y clara para preparar tu experiencia Crystal Moon.</p>
       </div>
       <div className="faq__list">
         {faqs.map((faq) => (
-          <details key={faq.question}>
-            <summary>{faq.question}</summary>
+          <details key={faq.question} name="crystal-moon-faq">
+            <summary>
+              {faq.question}
+              <span aria-hidden="true">+</span>
+            </summary>
             <p>{faq.answer}</p>
           </details>
         ))}

@@ -9,10 +9,11 @@ export type TicketType = {
 export const eventConfig = {
   eventName: "Crystal Moon",
   organizer: "K-BANG",
-  tagline: "Dónde el escenario es tuyo",
-  eventDate: "2026-08-22T18:00:00-06:00",
-  eventDateLabel: "Sábado 22 de agosto",
-  eventLocation: "Carpa Estudiantil o Auditorio Glaxo",
+  tagline: "Donde el escenario es tuyo",
+  eventDate: "2026-08-22T00:00:00-06:00",
+  eventDateLabel: "22 de agosto de 2026",
+  eventTimeLabel: "Hora por confirmar",
+  eventLocation: "Tec de Monterrey, Campus CCM",
   contactEmail: "CONTACTO_POR_DEFINIR",
   ticketTypes: [
     {
