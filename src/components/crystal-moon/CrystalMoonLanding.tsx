@@ -144,7 +144,7 @@ export function CrystalMoonLanding() {
             <div className="section-heading section-heading--split">
               <div>
                 <p className="eyebrow">La experiencia</p>
-                <h2>Una noche diseñada para sentirse en movimiento</h2>
+                <h2 className="section-title">Una noche diseñada para sentirse en movimiento</h2>
               </div>
               <p>
                 Baile, luz y una escenografía lunar se encuentran en una experiencia

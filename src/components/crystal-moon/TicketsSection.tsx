@@ -13,11 +13,11 @@ export function TicketsSection({ onReserve }: TicketsSectionProps) {
   return (
     <section className="tickets section-band reveal" id="boletos">
       <div className="tickets__visual" aria-hidden="true">
-        <Image src="/images/images_4.png" alt="" fill sizes="(max-width: 900px) 100vw, 60vw" />
+        <Image src="/images/images_4.png" alt="" fill sizes="100vw" />
       </div>
       <div className="tickets__content">
         <p className="eyebrow">Boletos</p>
-        <h2>Tu lugar frente al escenario empieza aquí</h2>
+        <h2 className="section-title">Tu lugar frente al escenario empieza aquí</h2>
         <p>
           Registra tu interés y sé parte de una noche de competencia, música y
           dirección visual creada para vivirse en primera fila.

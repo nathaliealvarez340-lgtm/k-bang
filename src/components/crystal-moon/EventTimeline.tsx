@@ -33,7 +33,7 @@ export function EventTimeline() {
         <div className="section-heading section-heading--timeline">
           <div>
             <p className="eyebrow">Dinámica del evento</p>
-            <h2>Cuatro momentos. Una sola noche.</h2>
+            <h2 className="section-title">Cuatro momentos. Una sola noche.</h2>
           </div>
           <p>Un recorrido que crece en energía hasta llegar al momento que todos esperan.</p>
         </div>

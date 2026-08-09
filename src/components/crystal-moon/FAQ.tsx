@@ -26,7 +26,7 @@ export function FAQ() {
     <section className="faq section-band reveal" id="faq">
       <div className="faq__intro">
         <p className="eyebrow">FAQ</p>
-        <h2>Lo que necesitas saber antes de la noche</h2>
+        <h2 className="section-title">Lo que necesitas saber antes de la noche</h2>
         <p>Información breve y clara para preparar tu experiencia Crystal Moon.</p>
       </div>
       <div className="faq__list">

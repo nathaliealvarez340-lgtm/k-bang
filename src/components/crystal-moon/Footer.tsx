@@ -9,7 +9,7 @@ export function Footer({ onReserve }: FooterProps) {
     <footer className="site-footer">
       <div className="site-footer__cta">
         <p className="eyebrow">K-BANG presenta</p>
-        <h2><span className="font-citadel">Crystal</span> Moon</h2>
+        <h2 className="section-title section-title--footer"><span className="font-citadel">Crystal</span> Moon</h2>
         <p>{eventConfig.tagline}</p>
         <button className="button button--primary" onClick={onReserve}>
           Reservar mi boleto <span aria-hidden="true">↗</span>

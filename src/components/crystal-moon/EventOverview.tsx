@@ -28,7 +28,7 @@ export function EventOverview() {
     <section className="overview section-band reveal" id="que-es">
       <div className="overview__intro">
         <p className="eyebrow">Qué es Crystal Moon</p>
-        <h2>El escenario cambia cuando llega la noche</h2>
+        <h2 className="section-title">El escenario cambia cuando llega la noche</h2>
         <p>
           Crystal Moon es un concurso de baile donde cada presentación se vuelve
           parte de una experiencia lunar: energía en vivo, dirección visual y una
