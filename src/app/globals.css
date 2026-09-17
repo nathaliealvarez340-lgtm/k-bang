@@ -548,6 +548,7 @@ h3 {
   color: var(--white);
   font-family: "Fredoka", sans-serif;
   font-size: 1.24rem;
+  font-weight: 600;
   margin-bottom: 10px;
 }
 
@@ -965,7 +966,7 @@ details {
 summary {
   color: var(--white);
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 details p {
@@ -1930,7 +1931,7 @@ h2 {
 
 h2 {
   font-size: clamp(3.3rem, 6.2vw, 6.5rem);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 0.94;
 }
 
@@ -2039,7 +2040,7 @@ h2 {
 }
 
 .experience-card {
-  border: 0;
+  border: 1px solid rgba(218, 214, 203, 0.14);
   border-radius: 6px;
   box-shadow: none;
   margin: 0;
@@ -2081,8 +2082,8 @@ h2 {
 
 .experience-card figcaption span {
   color: var(--turquoise);
-  font-size: 0.68rem;
-  font-weight: 800;
+  font-size: 0.62rem;
+  font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -2090,8 +2091,8 @@ h2 {
 .experience-card figcaption strong {
   color: var(--white);
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.4rem, 2.5vw, 2.5rem);
-  font-weight: 600;
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  font-weight: 500;
   line-height: 1.06;
   max-width: 680px;
 }
@@ -2105,33 +2106,7 @@ h2 {
   position: relative;
 }
 
-.timeline__backdrop {
-  inset: 0;
-  position: absolute;
-  z-index: -2;
-}
-
-.timeline__backdrop::after {
-  background:
-    linear-gradient(90deg, rgba(3, 8, 27, 0.96), rgba(3, 8, 27, 0.63) 48%, rgba(3, 8, 27, 0.9)),
-    linear-gradient(180deg, #050b22 0%, transparent 24%, transparent 74%, #050b22 100%);
-  content: "";
-  inset: 0;
-  position: absolute;
-}
-
-.timeline__backdrop img {
-  object-fit: cover;
-  opacity: 0.52;
-}
-
-:is(.experience-card, .timeline__backdrop) img,
-:is(.experience-card, .timeline__backdrop)::after {
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
-}
-
-:is(.experience-card, .timeline__backdrop)::after {
+.experience-card::after {
   pointer-events: none;
 }
 
@@ -2194,7 +2169,7 @@ h2 {
 .timeline__item h3 {
   font-family: "Playfair Display", Georgia, serif;
   font-size: 1.45rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .timeline__item p {
@@ -2313,7 +2288,7 @@ h2 {
 .ticket-card h3 {
   font-family: "Playfair Display", Georgia, serif;
   font-size: 2.2rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .ticket-card .ticket-card__price {
@@ -2389,14 +2364,14 @@ h2 {
     linear-gradient(135deg, #071333, #050b22 68%);
   border-top: 1px solid rgba(218, 214, 203, 0.12);
   display: grid;
-  gap: 36px;
+  gap: 24px;
   grid-template-columns: minmax(0, 1fr) auto;
-  padding: clamp(56px, 7vw, 88px) var(--page-gutter) 42px;
+  padding: clamp(40px, 5vw, 60px) var(--page-gutter) 28px;
 }
 
-.site-footer__cta h2 {
-  font-size: clamp(4.2rem, 8vw, 8rem);
-  margin-bottom: 14px;
+.site-footer__cta .eyebrow {
+  font-size: 0.65rem;
+  margin-bottom: 10px;
 }
 
 h2.section-title {
@@ -2405,28 +2380,38 @@ h2.section-title {
 }
 
 h2.section-title--footer {
-  font-size: clamp(3.2rem, 5.4vw, 5.5rem);
+  font-size: clamp(2.5rem, 4vw, 3.9rem);
+  margin-bottom: 8px;
 }
 
 .site-footer__cta > p:not(.eyebrow) {
-  font-size: 1.25rem;
-  margin-bottom: 22px;
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+}
+
+.site-footer__cta .button {
+  font-size: 0.84rem;
+  font-weight: 700;
+  min-height: 42px;
+  padding: 0 19px;
 }
 
 .site-footer__meta {
   display: grid;
-  gap: 7px;
+  font-size: 0.84rem;
+  gap: 3px;
   text-align: right;
 }
 
 .site-footer__meta strong {
   color: var(--gold);
-  margin-bottom: 8px;
+  font-weight: 600;
+  margin-bottom: 4px;
 }
 
 .site-footer__meta small {
   color: rgba(218, 214, 203, 0.4);
-  margin-top: 18px;
+  margin-top: 10px;
 }
 
 .reveal {
@@ -2676,7 +2661,7 @@ h2.section-title--footer {
   }
 
   h2.section-title--footer {
-    font-size: clamp(2.8rem, 13vw, 4.1rem);
+    font-size: clamp(2.5rem, 10vw, 3.2rem);
   }
 
   .section-heading--split,
@@ -2770,7 +2755,7 @@ h2.section-title--footer {
   .site-footer {
     align-items: start;
     grid-template-columns: 1fr;
-    padding: 64px var(--page-gutter) 38px;
+    padding: 44px var(--page-gutter) 28px;
   }
 
   .site-footer__meta {

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useLanguage } from "./LanguageProvider";
 
 export function EventTimeline() {
@@ -6,9 +5,6 @@ export function EventTimeline() {
 
   return (
     <section className="timeline section-band reveal" id="dinamica">
-      <div className="timeline__backdrop" aria-hidden="true">
-        <Image src="/images/images_3.png" alt="" fill sizes="100vw" />
-      </div>
       <div className="timeline__content">
         <div className="section-heading section-heading--timeline">
           <div>
