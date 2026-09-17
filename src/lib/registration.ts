@@ -1,4 +1,5 @@
 import { eventConfig, type TicketType } from "./event-config";
+import { translations, type Locale } from "./translations";
 
 export type AttendeeRole = "participante" | "publico" | "staff";
 
@@ -50,12 +51,12 @@ export function calculateTotal(ticketId: string, quantity: number) {
   return ticket.price * quantity;
 }
 
-export function formatCurrency(total: number | null) {
+export function formatCurrency(total: number | null, locale: Locale = "es") {
   if (total === null) {
-    return "Precio por confirmar";
+    return translations[locale].common.pricePending;
   }
 
-  return new Intl.NumberFormat("es-MX", {
+  return new Intl.NumberFormat(locale === "es" ? "es-MX" : "en-US", {
     style: "currency",
     currency: "MXN",
   }).format(total);

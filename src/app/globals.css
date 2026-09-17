@@ -874,16 +874,6 @@ details {
   grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
 }
 
-.tickets::after {
-  background:
-    linear-gradient(90deg, transparent, rgba(233, 171, 94, 0.18), transparent),
-    linear-gradient(180deg, transparent, rgba(124, 204, 210, 0.08), transparent);
-  content: "";
-  inset: 11% 10%;
-  opacity: 0.9;
-  position: absolute;
-}
-
 .tickets__content,
 .ticket-card {
   position: relative;
@@ -1667,6 +1657,18 @@ body {
   content: none;
 }
 
+.hero::after {
+  background: linear-gradient(180deg, transparent, #050b22);
+  bottom: 0;
+  content: "";
+  height: 26%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  z-index: -1;
+}
+
 .hero__picture,
 .hero__scrim {
   inset: 0;
@@ -1694,7 +1696,7 @@ body {
 .hero__content {
   align-self: center;
   max-width: min(720px, 52vw);
-  padding: 38px 0 64px;
+  padding: 16px 0 26px;
 }
 
 .hero__presenter {
@@ -1705,7 +1707,7 @@ body {
   font-weight: 700;
   gap: 9px;
   letter-spacing: 0.14em;
-  margin: 0 0 22px;
+  margin: 0 0 14px;
   text-transform: uppercase;
 }
 
@@ -1724,7 +1726,7 @@ body {
   color: rgba(218, 214, 203, 0.76);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
-  margin-bottom: 22px;
+  margin-bottom: 16px;
   text-transform: uppercase;
 }
 
@@ -1738,7 +1740,7 @@ h2 {
   flex-direction: column;
   font-size: clamp(5.7rem, 9.2vw, 9.2rem);
   line-height: 0.72;
-  margin: 0 0 28px;
+  margin: 0 0 22px;
   text-shadow: 0 8px 52px rgba(6, 61, 162, 0.24);
 }
 
@@ -1772,7 +1774,23 @@ h2 {
   color: rgba(218, 214, 203, 0.86);
   font-size: clamp(1.25rem, 2.2vw, 1.85rem);
   font-weight: 500;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
+}
+
+.hero__cta {
+  box-shadow:
+    0 4px 18px rgba(233, 171, 94, 0.2),
+    0 0 12px rgba(255, 218, 104, 0.16),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero__cta:hover {
+    box-shadow:
+      0 6px 20px rgba(233, 171, 94, 0.24),
+      0 0 16px rgba(255, 218, 104, 0.18),
+      0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  }
 }
 
 .hero__utility {
@@ -1889,6 +1907,7 @@ h2 {
 }
 
 .panel-stack {
+  background: linear-gradient(180deg, #050b22, rgba(5, 11, 34, 0) 360px);
   padding-bottom: 0;
 }
 
@@ -2172,43 +2191,16 @@ h2 {
 
 .tickets {
   align-items: center;
+  background:
+    radial-gradient(ellipse at 74% 46%, rgba(6, 61, 162, 0.18), transparent 54%),
+    radial-gradient(ellipse at 16% 82%, rgba(124, 204, 210, 0.055), transparent 46%),
+    linear-gradient(135deg, #050b22, #13214e 55%, #050b22);
   display: grid;
   gap: clamp(56px, 9vw, 140px);
   grid-template-columns: minmax(0, 0.86fr) minmax(420px, 0.84fr);
   isolation: isolate;
   overflow: hidden;
   position: relative;
-}
-
-.tickets::after {
-  background: radial-gradient(circle, rgba(233, 171, 94, 0.14), transparent 64%);
-  inset: 20% 0 10% 52%;
-  z-index: 0;
-}
-
-.tickets__visual {
-  background: #07122f;
-  inset: 0;
-  opacity: 1;
-  position: absolute;
-  z-index: -2;
-}
-
-.tickets__visual::after {
-  background:
-    linear-gradient(90deg, rgba(5, 11, 34, 0.94) 0%, rgba(7, 18, 47, 0.72) 45%, rgba(5, 11, 34, 0.76) 100%),
-    linear-gradient(180deg, rgba(5, 11, 34, 0.72) 0%, rgba(5, 11, 34, 0.36) 45%, rgba(5, 11, 34, 0.82) 100%);
-  content: "";
-  inset: 0;
-  position: absolute;
-  z-index: 1;
-}
-
-.tickets__visual img {
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  width: 100%;
 }
 
 .tickets__content h2 {
@@ -2383,14 +2375,14 @@ h2 {
     linear-gradient(135deg, #071333, #050b22 68%);
   border-top: 1px solid rgba(218, 214, 203, 0.12);
   display: grid;
-  gap: 60px;
+  gap: 36px;
   grid-template-columns: minmax(0, 1fr) auto;
-  padding: clamp(80px, 10vw, 140px) var(--page-gutter) 48px;
+  padding: clamp(56px, 7vw, 88px) var(--page-gutter) 42px;
 }
 
 .site-footer__cta h2 {
   font-size: clamp(4.2rem, 8vw, 8rem);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 h2.section-title {
@@ -2404,7 +2396,7 @@ h2.section-title--footer {
 
 .site-footer__cta > p:not(.eyebrow) {
   font-size: 1.25rem;
-  margin-bottom: 30px;
+  margin-bottom: 22px;
 }
 
 .site-footer__meta {
@@ -2544,9 +2536,6 @@ h2.section-title--footer {
     max-width: 620px;
   }
 
-  .tickets__visual img {
-    object-position: 58% center;
-  }
 }
 
 @media (max-width: 760px) {
@@ -2764,7 +2753,7 @@ h2.section-title--footer {
   .site-footer {
     align-items: start;
     grid-template-columns: 1fr;
-    padding: 86px var(--page-gutter) 38px;
+    padding: 64px var(--page-gutter) 38px;
   }
 
   .site-footer__meta {

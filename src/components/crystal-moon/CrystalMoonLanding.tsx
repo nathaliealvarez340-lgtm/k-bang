@@ -11,6 +11,7 @@ import { EventTimeline } from "./EventTimeline";
 import { FAQ } from "./FAQ";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { LanguageProvider, useLanguage } from "./LanguageProvider";
 import { ScrollProgress } from "./ScrollProgress";
 import { TicketsSection } from "./TicketsSection";
 
@@ -34,28 +35,28 @@ const mobileHero = getImageProps({
 const experiencePanels = [
   {
     src: "/images/images_1.png",
-    alt: "Grupo de baile sobre un escenario lunar",
-    eyebrow: "Energía en escena",
-    title: "El performance toma la noche",
     className: "experience-card--lead",
   },
   {
     src: "/images/images_2.png",
-    alt: "Instalación escénica de luna y cristales",
-    eyebrow: "Dirección visual",
-    title: "Una atmósfera que transforma cada presentación",
     className: "experience-card--moon",
   },
   {
     src: "/images/images_3.png",
-    alt: "Escenario iluminado con paneles azules",
-    eyebrow: "Crystal Stage",
-    title: "Luz, música y un cierre para recordar",
     className: "experience-card--stage",
   },
 ];
 
 export function CrystalMoonLanding() {
+  return (
+    <LanguageProvider>
+      <LandingContent />
+    </LanguageProvider>
+  );
+}
+
+function LandingContent() {
+  const { t } = useLanguage();
   const [isCheckoutOpen, setCheckoutOpen] = useState(false);
 
   const openCheckout = () => setCheckoutOpen(true);
@@ -99,39 +100,39 @@ export function CrystalMoonLanding() {
           <div className="hero__scrim" aria-hidden="true" />
 
           <div className="hero__content hero-intro">
-            <p className="hero__presenter"><span>K-BANG</span> presenta</p>
-            <p className="hero__kicker">{eventConfig.eventHeroLocation} · {eventConfig.eventMonthYear}</p>
+            <p className="hero__presenter"><span>K-BANG</span> {t.hero.presenter}</p>
+            <p className="hero__kicker">{t.hero.location} · {t.hero.monthYear}</p>
             <h1>
               <span className="font-citadel">Crystal</span>
               <span className="hero__moon">Moon</span>
             </h1>
-            <p className="hero__tagline">Donde el escenario es tuyo</p>
-            <button className="button button--primary" onClick={openCheckout}>
-              Reservar mi boleto <span aria-hidden="true">↗</span>
+            <p className="hero__tagline">{t.hero.tagline}</p>
+            <button className="button button--primary hero__cta" onClick={openCheckout}>
+              {t.hero.reserve} <span aria-hidden="true">↗</span>
             </button>
           </div>
 
           <div className="hero__utility hero-intro hero-intro--utility">
-            <div className="hero-event-meta" aria-label="Información del evento">
+            <div className="hero-event-meta" aria-label={t.hero.infoAria}>
               <div className="hero-event-meta__item">
                 <EventIcon name="calendar" />
-                <span><small>Fecha</small>{eventConfig.eventDateLabel}</span>
+                <span><small>{t.hero.dateLabel}</small>{t.hero.date}</span>
               </div>
               <div className="hero-event-meta__item">
                 <EventIcon name="clock" />
-                <span><small>Horario</small>{eventConfig.eventTimeLabel}</span>
+                <span><small>{t.hero.timeLabel}</small>{t.hero.time}</span>
               </div>
               <div className="hero-event-meta__item">
                 <EventIcon name="location" />
-                <span><small>Lugar</small>{eventConfig.eventLocation}</span>
+                <span><small>{t.hero.placeLabel}</small>{t.hero.place}</span>
               </div>
               <div className="hero-event-meta__item">
                 <EventIcon name="people" />
-                <span><small>Audiencia</small>{eventConfig.eventAudience}</span>
+                <span><small>{t.hero.audienceLabel}</small>{t.hero.audience}</span>
               </div>
             </div>
             <div className="hero__countdown">
-              <p>La noche comienza en</p>
+              <p>{t.hero.countdownIntro}</p>
               <Countdown targetDate={eventConfig.eventDate} />
             </div>
           </div>
@@ -143,26 +144,23 @@ export function CrystalMoonLanding() {
           <section className="experience section-band reveal" id="experiencia">
             <div className="section-heading section-heading--split">
               <div>
-                <p className="eyebrow">La experiencia</p>
-                <h2 className="section-title">Una noche diseñada para sentirse en movimiento</h2>
+                <p className="eyebrow">{t.experience.eyebrow}</p>
+                <h2 className="section-title">{t.experience.title}</h2>
               </div>
-              <p>
-                Baile, luz y una escenografía lunar se encuentran en una experiencia
-                donde cada presentación forma parte del espectáculo.
-              </p>
+              <p>{t.experience.description}</p>
             </div>
             <div className="experience__gallery">
               {experiencePanels.map((panel, index) => (
                 <figure className={`experience-card ${panel.className}`} key={panel.src}>
                   <Image
                     src={panel.src}
-                    alt={panel.alt}
+                    alt={t.experience.panels[index].alt}
                     fill
                     sizes={index === 0 ? "(max-width: 760px) 100vw, 62vw" : "(max-width: 760px) 100vw, 36vw"}
                   />
                   <figcaption>
-                    <span>{panel.eyebrow}</span>
-                    <strong>{panel.title}</strong>
+                    <span>{t.experience.panels[index].eyebrow}</span>
+                    <strong>{t.experience.panels[index].title}</strong>
                   </figcaption>
                 </figure>
               ))}

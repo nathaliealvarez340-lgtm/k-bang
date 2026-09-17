@@ -1,24 +1,26 @@
-import { eventConfig } from "@/lib/event-config";
+import { useLanguage } from "./LanguageProvider";
 
 type FooterProps = {
   onReserve: () => void;
 };
 
 export function Footer({ onReserve }: FooterProps) {
+  const { t } = useLanguage();
+
   return (
     <footer className="site-footer">
       <div className="site-footer__cta">
-        <p className="eyebrow">K-BANG presenta</p>
+        <p className="eyebrow">K-BANG {t.footer.presenter}</p>
         <h2 className="section-title section-title--footer"><span className="font-citadel">Crystal</span> Moon</h2>
-        <p>{eventConfig.tagline}</p>
+        <p>{t.footer.tagline}</p>
         <button className="button button--primary" onClick={onReserve}>
-          Reservar mi boleto <span aria-hidden="true">↗</span>
+          {t.footer.reserve} <span aria-hidden="true">↗</span>
         </button>
       </div>
       <div className="site-footer__meta">
         <strong>K-BANG · Crystal Moon</strong>
-        <span>{eventConfig.eventDateLabel}</span>
-        <span>{eventConfig.eventLocation}</span>
+        <span>{t.hero.date}</span>
+        <span>{t.hero.place}</span>
         <small>© 2026 K-BANG</small>
       </div>
     </footer>

@@ -6,12 +6,12 @@ import {
   calculateTotal,
   createReference,
   formatCurrency,
-  getTicket,
   submitRegistration,
   type AttendeeRole,
   type RegistrationData,
   type RegistrationFormData,
 } from "@/lib/registration";
+import { useLanguage } from "./LanguageProvider";
 
 type CheckoutModalProps = {
   isOpen: boolean;
@@ -35,9 +35,12 @@ function isValidEmail(email: string) {
 }
 
 export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
+  const { locale, t } = useLanguage();
   const [step, setStep] = useState<Step>("datos");
   const [form, setForm] = useState<RegistrationFormData>(initialForm);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"fullName" | "email" | "phone" | "quantity", boolean>>>({});
+  const [isSubmitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [reference, setReference] = useState("");
   const [proofFile, setProofFile] = useState<File | null>(null);
   const [registration, setRegistration] = useState<RegistrationData | null>(
@@ -45,7 +48,6 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   );
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const ticket = useMemo(() => getTicket(form.ticketType), [form.ticketType]);
   const total = useMemo(
     () => calculateTotal(form.ticketType, form.quantity),
     [form.quantity, form.ticketType],
@@ -82,6 +84,8 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
       setProofFile(null);
       setRegistration(null);
       setForm(initialForm);
+      setSubmitting(false);
+      setSubmitError(false);
     }
   }, [isOpen]);
 
@@ -94,26 +98,26 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
     value: RegistrationFormData[K],
   ) => {
     setForm((current) => ({ ...current, [key]: value }));
-    setErrors((current) => ({ ...current, [key]: "" }));
+    setErrors((current) => ({ ...current, [key]: false }));
   };
 
   const validateData = () => {
-    const nextErrors: Record<string, string> = {};
+    const nextErrors: typeof errors = {};
 
     if (!form.fullName.trim()) {
-      nextErrors.fullName = "Escribe tu nombre completo.";
+      nextErrors.fullName = true;
     }
 
     if (!isValidEmail(form.email)) {
-      nextErrors.email = "Escribe un correo válido.";
+      nextErrors.email = true;
     }
 
     if (!form.phone.trim()) {
-      nextErrors.phone = "Escribe tu teléfono o WhatsApp.";
+      nextErrors.phone = true;
     }
 
     if (form.quantity < 1) {
-      nextErrors.quantity = "Selecciona al menos 1 boleto.";
+      nextErrors.quantity = true;
     }
 
     setErrors(nextErrors);
@@ -129,6 +133,10 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   };
 
   const finishRegistration = async () => {
+    if (isSubmitting) return;
+    setSubmitting(true);
+    setSubmitError(false);
+
     const registrationData: RegistrationData = {
       ...form,
       fullName: form.fullName.trim(),
@@ -137,7 +145,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
       comments: form.comments?.trim(),
       reference,
       total,
-      ticketLabel: ticket.name,
+      ticketLabel: t.tickets.ticketName,
       eventName: eventConfig.eventName,
       eventDate: eventConfig.eventDate,
       eventLocation: eventConfig.eventLocation,
@@ -145,9 +153,15 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
       createdAt: new Date().toISOString(),
     };
 
-    await submitRegistration(registrationData);
-    setRegistration(registrationData);
-    setStep("exito");
+    try {
+      await submitRegistration(registrationData);
+      setRegistration(registrationData);
+      setStep("exito");
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -163,13 +177,13 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
       >
         <div className="checkout__header">
           <div>
-            <p className="eyebrow">Reserva Crystal Moon</p>
+            <p className="eyebrow">{t.checkout.eyebrow}</p>
             <h2 id="checkout-title">
-              {step === "exito" ? "Registro enviado" : "Reserva tu boleto"}
+              {step === "exito" ? t.checkout.sentTitle : t.checkout.title}
             </h2>
           </div>
           <button
-            aria-label="Cerrar reserva"
+            aria-label={t.checkout.closeAria}
             className="icon-button"
             onClick={onClose}
             type="button"
@@ -179,10 +193,10 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
         </div>
 
         {step !== "exito" && (
-          <div className="checkout__steps" aria-label="Progreso de reserva">
-            {["datos", "pago", "comprobante"].map((item, index) => (
+          <div className="checkout__steps" aria-label={t.checkout.progressAria}>
+            {(["datos", "pago", "comprobante"] as const).map((item, index) => (
               <span className={step === item ? "is-active" : ""} key={item}>
-                {index + 1}. {item}
+                {index + 1}. {t.checkout.steps[item]}
               </span>
             ))}
           </div>
@@ -191,37 +205,37 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
         {step === "datos" && (
           <form className="checkout__form" onSubmit={goToPayment}>
             <label>
-              Nombre completo
+              {t.checkout.fullName}
               <input
                 autoComplete="name"
                 value={form.fullName}
                 onChange={(event) => updateField("fullName", event.target.value)}
               />
-              {errors.fullName && <small>{errors.fullName}</small>}
+              {errors.fullName && <small>{t.checkout.errors.fullName}</small>}
             </label>
             <label>
-              Correo electrónico
+              {t.checkout.email}
               <input
                 autoComplete="email"
                 inputMode="email"
                 value={form.email}
                 onChange={(event) => updateField("email", event.target.value)}
               />
-              {errors.email && <small>{errors.email}</small>}
+              {errors.email && <small>{t.checkout.errors.email}</small>}
             </label>
             <label>
-              Teléfono / WhatsApp
+              {t.checkout.phone}
               <input
                 autoComplete="tel"
                 inputMode="tel"
                 value={form.phone}
                 onChange={(event) => updateField("phone", event.target.value)}
               />
-              {errors.phone && <small>{errors.phone}</small>}
+              {errors.phone && <small>{t.checkout.errors.phone}</small>}
             </label>
             <div className="checkout__grid">
               <label>
-                Tipo de boleto
+                {t.checkout.ticketType}
                 <select
                   value={form.ticketType}
                   onChange={(event) =>
@@ -232,13 +246,13 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                     .filter((item) => item.enabled)
                     .map((item) => (
                       <option key={item.id} value={item.id}>
-                        {item.name}
+                        {t.tickets.ticketName}
                       </option>
                     ))}
                 </select>
               </label>
               <label>
-                Cantidad
+                {t.checkout.quantity}
                 <input
                   min={1}
                   type="number"
@@ -247,16 +261,12 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                     updateField("quantity", Number(event.target.value))
                   }
                 />
-                {errors.quantity && <small>{errors.quantity}</small>}
+                {errors.quantity && <small>{t.checkout.errors.quantity}</small>}
               </label>
             </div>
             <fieldset>
-              <legend>¿Participas o asistes como público?</legend>
-              {[
-                ["participante", "Participante"],
-                ["publico", "Público"],
-                ["staff", "Staff / Invitado"],
-              ].map(([value, label]) => (
+              <legend>{t.checkout.roleLegend}</legend>
+              {(["participante", "publico", "staff"] as const).map((value) => (
                 <label className="radio-pill" key={value}>
                   <input
                     checked={form.role === value}
@@ -267,12 +277,12 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                       updateField("role", event.target.value as AttendeeRole)
                     }
                   />
-                  {label}
+                  {t.checkout.roles[value]}
                 </label>
               ))}
             </fieldset>
             <label>
-              Comentarios opcionales
+              {t.checkout.comments}
               <textarea
                 rows={3}
                 value={form.comments}
@@ -280,7 +290,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               />
             </label>
             <button className="button button--primary" type="submit">
-              Continuar a pago
+              {t.checkout.continuePayment}
             </button>
           </form>
         )}
@@ -290,11 +300,11 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
             <OrderSummary
               quantity={form.quantity}
               reference={reference}
-              ticketName={ticket.name}
+              ticketName={t.tickets.ticketName}
               total={total}
             />
             <div className="payment-box">
-              <h3>Datos de pago</h3>
+              <h3>{t.checkout.paymentTitle}</h3>
               {hasConfirmedPaymentDetails ? (
                 <>
                   <p>{eventConfig.payment.bankName}</p>
@@ -307,17 +317,15 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                     }
                     type="button"
                   >
-                    Copiar CLABE
+                    {t.checkout.copyClabe}
                   </button>
                 </>
               ) : (
                 <p className="payment-box__pending">
-                  Datos de pago por confirmar. La interfaz queda lista para
-                  activar transferencia cuando K-BANG confirme banco, titular y
-                  CLABE.
+                  {t.checkout.paymentPending}
                 </p>
               )}
-              <p>{eventConfig.payment.instructions}</p>
+              <p>{t.checkout.paymentInstructions}</p>
             </div>
             <div className="checkout__actions">
               <button
@@ -325,14 +333,14 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                 onClick={() => setStep("datos")}
                 type="button"
               >
-                Volver
+                {t.checkout.back}
               </button>
               <button
                 className="button button--primary"
                 onClick={() => setStep("comprobante")}
                 type="button"
               >
-                Subir comprobante
+                {t.checkout.uploadProof}
               </button>
             </div>
           </div>
@@ -343,11 +351,11 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
             <OrderSummary
               quantity={form.quantity}
               reference={reference}
-              ticketName={ticket.name}
+              ticketName={t.tickets.ticketName}
               total={total}
             />
             <label className="upload-box">
-              <span>Comprobante de pago</span>
+              <span>{t.checkout.proofLabel}</span>
               <input
                 accept=".pdf,.jpg,.jpeg,.png,.heic,image/heic,application/pdf,image/jpeg,image/png"
                 type="file"
@@ -358,12 +366,11 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               <strong>
                 {proofFile
                   ? proofFile.name
-                  : "PDF, JPG, PNG o HEIC. Se guardará localmente por ahora."}
+                  : t.checkout.proofHint}
               </strong>
             </label>
             <p className="checkout__note">
-              TODO: conectar esta subida a storage y asociar el archivo con la
-              referencia de registro cuando exista backend.
+              {t.checkout.proofNote}
             </p>
             <div className="checkout__actions">
               <button
@@ -371,49 +378,48 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                 onClick={() => setStep("pago")}
                 type="button"
               >
-                Volver
+                {t.checkout.back}
               </button>
               <button
                 className="button button--primary"
                 onClick={finishRegistration}
+                disabled={isSubmitting}
                 type="button"
               >
-                Enviar registro
+                {isSubmitting ? t.checkout.sending : t.checkout.sendRegistration}
               </button>
             </div>
+            {submitError && <p role="alert">{t.checkout.errors.submit}</p>}
           </div>
         )}
 
         {step === "exito" && registration && (
           <div className="success-panel">
             <span className="success-panel__moon" aria-hidden="true" />
-            <h3>Tu registro fue enviado.</h3>
-            <p>
-              Revisaremos tu comprobante y te enviaremos la confirmación de tu
-              boleto por correo.
-            </p>
+            <h3>{t.checkout.successTitle}</h3>
+            <p>{t.checkout.successDescription}</p>
             <dl>
               <div>
-                <dt>Nombre</dt>
+                <dt>{t.checkout.name}</dt>
                 <dd>{registration.fullName}</dd>
               </div>
               <div>
-                <dt>Correo</dt>
+                <dt>{t.checkout.emailShort}</dt>
                 <dd>{registration.email}</dd>
               </div>
               <div>
-                <dt>Boletos</dt>
+                <dt>{t.checkout.tickets}</dt>
                 <dd>
-                  {registration.quantity} · {registration.ticketLabel}
+                  {registration.quantity} · {t.tickets.ticketName}
                 </dd>
               </div>
               <div>
-                <dt>Referencia</dt>
+                <dt>{t.checkout.reference}</dt>
                 <dd>{registration.reference}</dd>
               </div>
             </dl>
             <button className="button button--primary" onClick={onClose}>
-              Cerrar
+              {t.checkout.close}
             </button>
           </div>
         )}
@@ -433,23 +439,25 @@ function OrderSummary({
   ticketName: string;
   total: number | null;
 }) {
+  const { locale, t } = useLanguage();
+
   return (
     <div className="order-summary">
-      <h3>Resumen</h3>
+      <h3>{t.checkout.summary}</h3>
       <div>
-        <span>Boleto</span>
+        <span>{t.checkout.ticket}</span>
         <strong>{ticketName}</strong>
       </div>
       <div>
-        <span>Cantidad</span>
+        <span>{t.checkout.quantity}</span>
         <strong>{quantity}</strong>
       </div>
       <div>
-        <span>Total</span>
-        <strong>{formatCurrency(total)}</strong>
+        <span>{t.checkout.total}</span>
+        <strong>{formatCurrency(total, locale)}</strong>
       </div>
       <div>
-        <span>Referencia</span>
+        <span>{t.checkout.reference}</span>
         <strong>{reference}</strong>
       </div>
     </div>
