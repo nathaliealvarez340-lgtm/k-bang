@@ -2191,10 +2191,11 @@ h2 {
 
 .tickets {
   align-items: center;
-  background:
-    radial-gradient(ellipse at 74% 46%, rgba(6, 61, 162, 0.18), transparent 54%),
-    radial-gradient(ellipse at 16% 82%, rgba(124, 204, 210, 0.055), transparent 46%),
-    linear-gradient(135deg, #050b22, #13214e 55%, #050b22);
+  background: transparent;
+  backdrop-filter: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   display: grid;
   gap: clamp(56px, 9vw, 140px);
   grid-template-columns: minmax(0, 0.86fr) minmax(420px, 0.84fr);
