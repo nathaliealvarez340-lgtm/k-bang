@@ -1,3 +1,5 @@
+import { eventConfig } from "@/lib/event-config";
+
 const faqs = [
   {
     question: "¿Dónde será el evento?",
@@ -5,7 +7,7 @@ const faqs = [
   },
   {
     question: "¿Cuándo es Crystal Moon?",
-    answer: "El evento está programado para el sábado 22 de agosto de 2026. El horario se anunciará próximamente.",
+    answer: `El evento está programado para el ${eventConfig.eventDateLong}. ${eventConfig.eventTimeLabel}.`,
   },
   {
     question: "¿Puedo asistir aunque no participe?",

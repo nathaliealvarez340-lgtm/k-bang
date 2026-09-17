@@ -30,8 +30,8 @@ export function TicketsSection({ onReserve }: TicketsSectionProps) {
       </div>
       <article className="ticket-card">
         <div className="ticket-card__date" aria-hidden="true">
-          <strong>22</strong>
-          <span>AGO<br />2026</span>
+          <strong>{eventConfig.eventDay}</strong>
+          <span>{eventConfig.eventMonthShort}<br />{eventConfig.eventYear}</span>
         </div>
         <div className="ticket-card__body">
           <span className="ticket-card__label">Registro de interés abierto</span>

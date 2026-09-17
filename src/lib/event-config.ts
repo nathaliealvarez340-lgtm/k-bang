@@ -6,14 +6,36 @@ export type TicketType = {
   enabled: boolean;
 };
 
+const eventDate = "2026-11-07T00:00:00-06:00";
+const dateParts = new Intl.DateTimeFormat("es-MX", {
+  timeZone: "America/Mexico_City",
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).formatToParts(new Date(eventDate));
+const datePart = (type: "weekday" | "day" | "month" | "year") =>
+  dateParts.find((part) => part.type === type)?.value ?? "";
+const day = datePart("day");
+const month = datePart("month");
+const year = datePart("year");
+const weekday = datePart("weekday");
+
 export const eventConfig = {
   eventName: "Crystal Moon",
   organizer: "K-BANG",
   tagline: "Donde el escenario es tuyo",
-  eventDate: "2026-08-22T00:00:00-06:00",
-  eventDateLabel: "22 de agosto de 2026",
+  eventDate,
+  eventDateLabel: `${day} de ${month}, ${year}`,
+  eventDateLong: `${weekday.charAt(0).toUpperCase()}${weekday.slice(1)} ${day} de ${month} de ${year}`,
+  eventMonthYear: `${month.charAt(0).toUpperCase()}${month.slice(1)} ${year}`,
+  eventDay: day,
+  eventMonthShort: month.slice(0, 3).toUpperCase(),
+  eventYear: year,
   eventTimeLabel: "Hora por confirmar",
-  eventLocation: "Tec de Monterrey, Campus CCM",
+  eventLocation: "Tec de Monterrey, CCM",
+  eventHeroLocation: "Tec de Monterrey · Campus CCM",
+  eventAudience: "Para Comunidad Tec, Exatecs y Externos",
   contactEmail: "CONTACTO_POR_DEFINIR",
   ticketTypes: [
     {

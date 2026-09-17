@@ -100,7 +100,7 @@ export function CrystalMoonLanding() {
 
           <div className="hero__content hero-intro">
             <p className="hero__presenter"><span>K-BANG</span> presenta</p>
-            <p className="hero__kicker">Tec de Monterrey · Campus CCM · Agosto 2026</p>
+            <p className="hero__kicker">{eventConfig.eventHeroLocation} · {eventConfig.eventMonthYear}</p>
             <h1>
               <span className="font-citadel">Crystal</span>
               <span className="hero__moon">Moon</span>
@@ -115,19 +115,19 @@ export function CrystalMoonLanding() {
             <div className="hero-event-meta" aria-label="Información del evento">
               <div className="hero-event-meta__item">
                 <EventIcon name="calendar" />
-                <span><small>Fecha</small>22 de agosto, 2026</span>
+                <span><small>Fecha</small>{eventConfig.eventDateLabel}</span>
               </div>
               <div className="hero-event-meta__item">
                 <EventIcon name="clock" />
-                <span><small>Horario</small>Hora por confirmar</span>
+                <span><small>Horario</small>{eventConfig.eventTimeLabel}</span>
               </div>
               <div className="hero-event-meta__item">
                 <EventIcon name="location" />
-                <span><small>Lugar</small>Tec de Monterrey, CCM</span>
+                <span><small>Lugar</small>{eventConfig.eventLocation}</span>
               </div>
               <div className="hero-event-meta__item">
                 <EventIcon name="people" />
-                <span><small>Audiencia</small>Comunidad Tec, Exatecs y Externos</span>
+                <span><small>Audiencia</small>{eventConfig.eventAudience}</span>
               </div>
             </div>
             <div className="hero__countdown">
