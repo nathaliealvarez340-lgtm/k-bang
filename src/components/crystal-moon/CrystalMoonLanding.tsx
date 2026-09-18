@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image, { getImageProps } from "next/image";
 import { useEffect, useState } from "react";
 import { eventConfig } from "@/lib/event-config";
@@ -15,6 +16,11 @@ import { LanguageProvider, useLanguage } from "./LanguageProvider";
 import { ResponsiveCardCarousel } from "./ResponsiveCardCarousel";
 import { ScrollProgress } from "./ScrollProgress";
 import { TicketsSection } from "./TicketsSection";
+
+const KbangMascot3D = dynamic(
+  () => import("./KbangMascot3D").then((module) => module.KbangMascot3D),
+  { ssr: false },
+);
 
 const desktopHero = getImageProps({
   src: "/images/hero_desktop.png",
@@ -112,6 +118,8 @@ function LandingContent() {
               {t.hero.reserve} <span aria-hidden="true">↗</span>
             </button>
           </div>
+
+          <KbangMascot3D />
 
           <div className="hero__utility hero-intro hero-intro--utility">
             <div className="hero-event-meta" aria-label={t.hero.infoAria}>

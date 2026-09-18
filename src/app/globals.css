@@ -1935,6 +1935,96 @@ h2 {
   line-height: 0.94;
 }
 
+.hero-mascot {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  bottom: 162px;
+  cursor: pointer;
+  height: 208px;
+  padding: 0;
+  position: absolute;
+  right: max(var(--page-gutter), 5vw);
+  touch-action: manipulation;
+  width: 190px;
+  z-index: 2;
+}
+
+.hero-mascot:focus-visible {
+  outline: 2px solid var(--turquoise);
+  outline-offset: 4px;
+}
+
+.hero-mascot__canvas,
+.hero-mascot__fallback {
+  height: 100% !important;
+  inset: 0;
+  pointer-events: none;
+  position: absolute !important;
+  width: 100% !important;
+}
+
+.hero-mascot__fallback {
+  object-fit: contain;
+  opacity: 1;
+  transition: opacity 220ms ease;
+}
+
+.hero-mascot__fallback.is-hidden {
+  opacity: 0;
+}
+
+.hero-mascot__bubble {
+  backdrop-filter: blur(14px);
+  background: rgba(5, 11, 34, 0.82);
+  border: 1px solid rgba(174, 162, 235, 0.48);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(4, 7, 29, 0.2);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  left: 50%;
+  opacity: 0;
+  padding: 6px 12px;
+  pointer-events: none;
+  position: absolute;
+  top: -24px;
+  transform: translate(-50%, 8px) scale(0.85);
+  transition: opacity 180ms ease, transform 180ms ease;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.hero-mascot__bubble.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+@media (max-width: 1024px) {
+  .hero-mascot {
+    bottom: 286px;
+    height: 164px;
+    right: 4vw;
+    width: 150px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-mascot {
+    bottom: 290px;
+    height: 136px;
+    right: 10px;
+    width: 124px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mascot__bubble,
+  .hero-mascot__fallback {
+    transition: none;
+  }
+}
+
 .section-heading,
 .overview__intro,
 .faq__intro {
