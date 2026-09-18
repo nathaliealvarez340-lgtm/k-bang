@@ -1,7 +1,8 @@
 import { useLanguage } from "./LanguageProvider";
+import { ResponsiveCardCarousel } from "./ResponsiveCardCarousel";
 
 export function EventTimeline() {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
 
   return (
     <section className="timeline section-band reveal" id="dinamica">
@@ -13,16 +14,21 @@ export function EventTimeline() {
           </div>
           <p>{t.timeline.description}</p>
         </div>
-        <ol className="timeline__track">
-          {t.timeline.items.map((item, index) => (
+        <ResponsiveCardCarousel
+          as="ol"
+          className="timeline__track"
+          items={t.timeline.items}
+          label={t.timeline.eyebrow}
+          locale={locale}
+          renderItem={(item, index) => (
             <li className="timeline__item" key={item.title}>
               <span className="timeline__number">{String(index + 1).padStart(2, "0")}</span>
               <small>{item.label}</small>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </li>
-          ))}
-        </ol>
+          )}
+        />
       </div>
     </section>
   );

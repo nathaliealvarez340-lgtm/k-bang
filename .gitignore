@@ -23,3 +23,7 @@ docs/PROPUESTA PARA K- BANG.pdf
 "@ | Out-File -Encoding utf8 .gitignore
 
 .local-assets/
+
+*.blend1
+tsconfig.tsbuildinfo
+*.blend

@@ -1,8 +1,9 @@
 import type { CSSProperties } from "react";
 import { useLanguage } from "./LanguageProvider";
+import { ResponsiveCardCarousel } from "./ResponsiveCardCarousel";
 
 export function EventOverview() {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
 
   return (
     <section className="overview section-band reveal" id="que-es">
@@ -12,8 +13,12 @@ export function EventOverview() {
         <p>{t.overview.description}</p>
         <span className="overview__signature">{t.overview.signature}</span>
       </div>
-      <div className="overview__grid">
-        {t.overview.cards.map((card, index) => (
+      <ResponsiveCardCarousel
+        className="overview__grid"
+        items={t.overview.cards}
+        label={t.overview.eyebrow}
+        locale={locale}
+        renderItem={(card, index) => (
           <article
             className="feature-card"
             key={card.title}
@@ -25,8 +30,8 @@ export function EventOverview() {
               <p>{card.text}</p>
             </div>
           </article>
-        ))}
-      </div>
+        )}
+      />
     </section>
   );
 }

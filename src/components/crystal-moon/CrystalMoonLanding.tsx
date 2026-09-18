@@ -12,6 +12,7 @@ import { FAQ } from "./FAQ";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { LanguageProvider, useLanguage } from "./LanguageProvider";
+import { ResponsiveCardCarousel } from "./ResponsiveCardCarousel";
 import { ScrollProgress } from "./ScrollProgress";
 import { TicketsSection } from "./TicketsSection";
 
@@ -56,7 +57,7 @@ export function CrystalMoonLanding() {
 }
 
 function LandingContent() {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
   const [isCheckoutOpen, setCheckoutOpen] = useState(false);
 
   const openCheckout = () => setCheckoutOpen(true);
@@ -149,8 +150,12 @@ function LandingContent() {
               </div>
               <p>{t.experience.description}</p>
             </div>
-            <div className="experience__gallery">
-              {experiencePanels.map((panel, index) => (
+            <ResponsiveCardCarousel
+              className="experience__gallery"
+              items={experiencePanels}
+              label={t.experience.eyebrow}
+              locale={locale}
+              renderItem={(panel, index) => (
                 <figure className={`experience-card ${panel.className}`} key={panel.src}>
                   <Image
                     src={panel.src}
@@ -163,8 +168,8 @@ function LandingContent() {
                     <strong>{t.experience.panels[index].title}</strong>
                   </figcaption>
                 </figure>
-              ))}
-            </div>
+              )}
+            />
           </section>
 
           <EventTimeline />

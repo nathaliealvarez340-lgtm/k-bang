@@ -2807,3 +2807,282 @@ h2.section-title--footer {
     padding: 26px 22px;
   }
 }
+
+@media (max-width: 1024px) {
+  :root {
+    --page-gutter: clamp(28px, 4vw, 44px);
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    position: relative;
+  }
+
+  .mobile-nav__trigger {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(218, 214, 203, 0.16);
+    border-radius: 50%;
+    color: var(--white);
+    display: inline-flex;
+    font-size: 1.1rem;
+    height: 38px;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    width: 38px;
+  }
+
+  .mobile-nav__panel {
+    backdrop-filter: blur(22px) saturate(130%);
+    background: rgba(5, 11, 34, 0.94);
+    border: 1px solid rgba(124, 204, 210, 0.26);
+    border-radius: 8px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+    display: grid;
+    min-width: 200px;
+    padding: 8px;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    z-index: 30;
+  }
+
+  .mobile-nav__panel[hidden] {
+    display: none;
+  }
+
+  .mobile-nav__panel a {
+    border-radius: 5px;
+    color: var(--cream);
+    font-size: 0.88rem;
+    padding: 10px 12px;
+  }
+
+  .mobile-nav__panel a:hover,
+  .mobile-nav__panel a:focus-visible {
+    background: rgba(124, 204, 210, 0.1);
+    color: var(--white);
+  }
+
+  .section-band {
+    padding: clamp(72px, 8vw, 96px) var(--page-gutter);
+  }
+
+  h2.section-title,
+  :is(.overview__intro, .tickets__content, .faq__intro) h2.section-title {
+    font-size: clamp(2.7rem, 4.6vw, 4rem);
+    line-height: 1.02;
+  }
+
+  .overview,
+  .tickets,
+  .faq {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .overview {
+    gap: 34px;
+  }
+
+  .section-heading--split,
+  .section-heading--timeline {
+    align-items: start;
+    gap: 18px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .responsive-carousel {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .responsive-carousel__track {
+    --carousel-card-width: 68vw;
+    align-items: stretch;
+    display: flex;
+    gap: 12px;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    margin-left: calc(-1 * var(--page-gutter));
+    margin-right: calc(-1 * var(--page-gutter));
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 0 max(16px, calc((100vw - var(--carousel-card-width)) / 2));
+    position: relative;
+    scroll-padding-inline: 12px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    width: calc(100% + 2 * var(--page-gutter));
+  }
+
+  .responsive-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .responsive-carousel__track > * {
+    flex: 0 0 var(--carousel-card-width);
+    max-width: var(--carousel-card-width);
+    opacity: 0.67;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    transform: scale(0.96);
+    transition: opacity 380ms ease, transform 380ms ease;
+  }
+
+  .responsive-carousel__track > [data-carousel-active="true"] {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .responsive-carousel__track:focus-visible {
+    outline-offset: -4px;
+  }
+
+  .responsive-carousel__indicators {
+    align-items: center;
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .responsive-carousel__dot {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    display: inline-flex;
+    height: 30px;
+    justify-content: center;
+    padding: 0;
+    width: 30px;
+  }
+
+  .responsive-carousel__dot::before {
+    background: rgba(200, 201, 255, 0.38);
+    border-radius: 99px;
+    content: "";
+    height: 3px;
+    transition: background 300ms ease, box-shadow 300ms ease, width 300ms ease;
+    width: 12px;
+  }
+
+  .responsive-carousel__dot[aria-current="true"]::before {
+    background: var(--turquoise);
+    box-shadow: 0 0 9px rgba(124, 204, 210, 0.35);
+    width: 20px;
+  }
+
+  .overview__grid.responsive-carousel__track,
+  .experience__gallery.responsive-carousel__track,
+  .timeline__track.responsive-carousel__track {
+    gap: 12px;
+  }
+
+  .responsive-carousel__track .feature-card {
+    min-height: 260px;
+  }
+
+  .responsive-carousel__track .experience-card,
+  .responsive-carousel__track .experience-card--lead,
+  .responsive-carousel__track .experience-card--moon,
+  .responsive-carousel__track .experience-card--stage {
+    aspect-ratio: 16 / 10;
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 0;
+  }
+
+  .responsive-carousel__track .experience-card img {
+    object-fit: cover;
+  }
+
+  .responsive-carousel__track .timeline__item {
+    min-height: 300px;
+  }
+
+  .tickets .ticket-card {
+    margin-inline: auto;
+    max-width: 620px;
+  }
+
+  .faq summary {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --page-gutter: 18px;
+  }
+
+  .site-header {
+    gap: 8px;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .site-header__actions {
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.8rem, 19vw, 5.1rem);
+  }
+
+  .hero__utility {
+    min-width: 0;
+  }
+
+  .section-band {
+    padding: 72px var(--page-gutter);
+  }
+
+  h2.section-title,
+  :is(.overview__intro, .tickets__content, .faq__intro) h2.section-title {
+    font-size: clamp(2.1rem, 7.5vw, 3rem);
+  }
+
+  .overview {
+    gap: 28px;
+  }
+
+  .responsive-carousel__track {
+    --carousel-card-width: 73vw;
+    gap: 10px;
+  }
+
+  .responsive-carousel__track .feature-card {
+    min-height: 250px;
+  }
+
+  .responsive-carousel__track .experience-card,
+  .responsive-carousel__track .experience-card--lead,
+  .responsive-carousel__track .experience-card--moon,
+  .responsive-carousel__track .experience-card--stage {
+    aspect-ratio: 4 / 5;
+  }
+
+  .responsive-carousel__track .timeline__item {
+    min-height: 290px;
+  }
+
+  .faq details {
+    padding: 16px 0;
+  }
+
+  .faq summary {
+    font-size: 0.94rem;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .responsive-carousel__track > *,
+  .responsive-carousel__dot::before {
+    transition: none;
+  }
+}
